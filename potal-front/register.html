@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="container" id="content">
+      <form id="registerForm">
+        <h2 class="mb-3">Register</h2>
+        <div class="input">
+          <label for="email">Email address</label>
+          <input
+            class="form-control"
+            type="text"
+            name="email"
+            placeholder="email@adress.com"
+          />
+        </div>
+        <div class="input">
+          <label for="username">Username</label>
+          <input
+            class="form-control"
+            type="text"
+            name="username"
+            placeholder="user"
+          />
+        </div>
+        <div class="input">
+          <label for="password">Password</label>
+          <input
+            class="form-control"
+            type="password"
+            name="password"
+            placeholder="password123"
+          />
+        </div>
+
+        <button type="submit" id="register_button" class="mt-4 btn-pers">
+          Register
+        </button>
+      </form>
+    </div>
+    <script src="./components/auth.js"></script>
+  </body>
+</html>
+
+<style>
+  #content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 1px solid lightgray;
+    padding: 4rem 4rem;
+    border-radius: 5px;
+    background: #fefefe;
+  }
+</style>

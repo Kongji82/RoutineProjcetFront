@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login</title>
+    <script>
+      if (localStorage.getItem("token")) {
+        fetch("http://localhost:8080/api/auth/verify", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            token: localStorage.getItem("token"),
+          }),
+        })
+          .then((response) => {
+            if (response.ok) {
+              return response.json();
+            } else {
+              throw new Error("네트워크 오류");
+            }
+          })
+          .then((data) => {
+            console.log(data);
+            if (data === false) {
+              window.location.href = "/";
+            } else {
+              localStorage.removeItem("token");
+            }
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      }
+    </script>
+  </head>
+  <body>
+    <div class="container" id="content">
+      <h2>Login</h2>
+      <form method="post">
+        <input type="email" name="email" placeholder="Email address" />
+        <input type="password" name="password" placeholder="Password" />
+        <button type="button">Login</button>
+      </form>
+      <p>Don't have an account? <a href="./register.html">Register</a></p>
+    </div>
+    <script src="./components/login.js"></script>
+  </body>
+</html>
+
+<style>
+  #content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 1px solid lightgray;
+    padding: 4rem 4rem;
+    border-radius: 5px;
+    background: #fefefe;
+  }
+</style>

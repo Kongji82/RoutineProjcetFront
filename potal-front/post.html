@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script>
+      const url = new URL(location.href);
+      const id = url.searchParams.get("id");
+      fetch(`http://localhost:8080/api/routine/get/${id}`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+        .then((response) => {
+          if (response.ok) {
+            return response.json();
+          } else {
+            throw new Error("네트워크 오류");
+          }
+        })
+        .then((data) => {
+          console.log(data);
+          let todo = ``;
+          for (i = 0; i < data.todos.length; i++) {
+            todo += `
+                <div class="container">
+                <div class="row">
+                  <div class="col-md-12">
+                    <h3>${data.todos[i].title}</h1>
+                    <p>${data.todos[i].description}</p>
+                    <p>${data.todos[i].startTime}</p>
+                    <p>${data.todos[i].endTime}</p>
+                  </div>
+                </div>
+              </div>
+              `;
+          }
+
+          document.body.innerHTML = `
+        <div class="container">
+          <div class="row">
+            <div class="col-md-12">
+              <h1>${data.title}</h1>
+              <p>${data.description}</p>
+                <div>${todo}</div>
+            </div>
+          </div>
+        </div>
+        `;
+        });
+    </script>
+  </head>
+  <body></body>
+</html>
